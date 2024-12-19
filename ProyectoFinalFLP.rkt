@@ -163,7 +163,7 @@
       (num-exp (numero) numero)
       (carac-exp (caracter) caracter)
       (string-exp (cadena) cadena)
-      (ok-exp () "salu2" )
+      (ok-exp () "ok-exp" )
       (exp-primitiva (prim args)
                      (let
                          (
@@ -373,7 +373,7 @@
       (num-exp (numero) numero)
       (carac-exp (caracter) caracter)
       (string-exp (cadena) cadena)
-      (ok-exp () "Salu2" )
+      (ok-exp () "ok-exp" )
       (exp-primitiva (prim args)
                      (let
                          (
@@ -432,7 +432,7 @@
                     )
                   )
                  )
-      (if-exp (condicion-inicial hace-verdadero lcondiciones lexpresiones hace-falso)
+      (if-exp (condicion-inicial then-exp lcondiciones lexpresiones else-exp)
               (let
                   (
                    (lista-condiciones (map (lambda (x) (evaluar-bool-expresion x amb))lcondiciones))
@@ -440,12 +440,12 @@
                    )
                 (if
                  (evaluar-bool-expresion condicion-inicial amb)
-                 (evaluar-expresion hace-verdadero amb)
+                 (evaluar-expresion then-exp amb)
                  (letrec
                     (
                      (encontrar-true (lambda (lista-cond lista-expre)
                                      (cond
-                                       [(null? lista-cond)(evaluar-expresion hace-falso amb)]
+                                       [(null? lista-cond)(evaluar-expresion else-exp amb)]
                                        [(equal? (car lista-cond) #t)(car lista-expre)]
                                        [else (encontrar-true (cdr lista-cond) (cdr lista-expre))])))
                      )
